@@ -1,0 +1,21 @@
+{
+    "capitulos": [
+      {
+        "id": 1,
+        "titulo": "Escrita Japonesa",
+        "topicos": [
+          {
+            "id": 1,
+            "titulo": "Hiragana",
+            "conteudo": {
+              "texto": "Sistema básico de escrita...",
+              "tabela": [
+                {"caractere": "あ", "romanji": "a", "audio": "a.mp3"},
+                {"caractere": "か", "romanji": "ka", "audio": "ka.mp3"}
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
