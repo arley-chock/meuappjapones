@@ -1,45 +1,38 @@
 <script>
   export let capitulo;
-
-  const navigateToCapitulo = () => {
-    if (capitulo) {
-      window.location.href = `/capitulo/${capitulo.id}`;
-    }
-  };
 </script>
 
 {#if capitulo}
   <div class="capitulo-card">
-    <h2>{capitulo.titulo}</h2>
-    <p>{capitulo.content}</p>
-    <div class="topicos-count">{capitulo.topicos.length} tópicos</div>
+    <h2 class="text-3xl font-bold mb-2">{capitulo.titulo}</h2>
+    <p class="text-gray-600 mb-4">{capitulo.descricao}</p>
+    {#if capitulo.conteudo?.texto}
+      <p class="mb-4">{capitulo.conteudo.texto}</p>
+    {/if}
+    {#if capitulo.conteudo?.topicos?.length}
+      <h3 class="text-xl font-semibold mb-2">Tópicos</h3>
+      <ul class="list-disc list-inside space-y-1">
+        {#each capitulo.conteudo.topicos as topico}
+          <li>
+            <span class="font-semibold">{topico.topico}:</span> {topico.conteudo}
+          </li>
+        {/each}
+      </ul>
+    {/if}
   </div>
 {:else}
   <p>Capítulo não encontrado.</p>
 {/if}
 
-<button 
-  on:click={navigateToCapitulo}
-  on:keydown={e => e.key === 'Enter' && navigateToCapitulo()}
-  class="capitulo-card"
->
-  <h2>{capitulo.titulo}</h2>
-  <div class="topicos-count">{capitulo.topicos.length} tópicos</div>
-</button>
-
 <style>
   .capitulo-card {
-    padding: 1.5rem;
-    margin: 1rem 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: transform 0.2s;
-    width: 100%;
-    text-align: left;
-  }
-  
-  .capitulo-card:hover {
-    transform: translateY(-2px);
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    background: #fff;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>

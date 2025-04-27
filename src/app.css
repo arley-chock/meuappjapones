@@ -1,17 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-    font-family: 'Arial', sans-serif;
+  --primary: #3B82F6;
+  --primary-dark: #2563EB;
+  --secondary: #10B981;
+  --accent: #F59E0B;
+  --background: #F3F4F6;
+  --text: #1F2937;
+  --text-light: #6B7280;
+  --error: #EF4444;
+  --success: #10B981;
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+  html {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: var(--text);
     line-height: 1.6;
   }
-  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4;
+  }
+  h2 {
+    @apply text-3xl md:text-4xl font-bold mb-3;
+  }
+  h3 {
+    @apply text-2xl font-semibold mb-2;
+  }
+  p, span, a, li {
+    @apply text-base md:text-lg;
+  }
+  a {
+    @apply text-[var(--primary)] hover:text-[var(--primary-dark)] transition-colors;
+  }
+  ul, ol {
+    @apply list-inside mb-4;
+  }
+  img, video {
+    @apply max-w-full h-auto rounded;
+  }
+  button, input, select, textarea {
+    @apply font-sans;
+  }
+}
+
+@layer components {
   .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
+    @apply max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
-  .tabela-hiragana {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
-    margin: 2rem 0;
+  .section {
+    @apply py-12 lg:py-20;
   }
+  .grid-responsive {
+    @apply grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+  }
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+  .btn {
+    @apply inline-block px-6 py-3 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-[var(--primary)] transition-transform transform;
+  }
+  .btn-primary {
+    @apply btn bg-[var(--primary)] text-white hover:bg-[var(--primary-dark)];
+  }
+  .btn-secondary {
+    @apply btn bg-[var(--secondary)] text-white hover:bg-opacity-90;
+  }
+  .btn-outline {
+    @apply btn border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white;
+  }
+  .card {
+    @apply bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:-translate-y-1 hover:shadow-2xl;
+  }
+  .card-body {
+    @apply p-6;
+  }
+  .badge {
+    @apply inline-block bg-[var(--accent)] text-white text-sm font-semibold py-1 px-2 rounded-full;
+  }
+  .alert {
+    @apply p-4 rounded-md flex items-start space-x-3;
+  }
+  .alert-success {
+    @apply alert bg-[var(--success)]/20 text-[var(--success)];
+  }
+  .alert-error {
+    @apply alert bg-[var(--error)]/20 text-[var(--error)];
+  }
+  .modal {
+    @apply fixed inset-0 bg-black bg-opacity-50 flex-center z-50;
+  }
+  .modal-content {
+    @apply bg-white rounded-lg shadow-xl max-w-lg w-full p-6 relative;
+  }
+  .tooltip {
+    @apply relative group;
+  }
+  .tooltip-text {
+    @apply absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 px-3 py-2 bg-[var(--text)] text-white text-sm rounded opacity-0 invisible transition-opacity;
+  }
+  .tooltip:hover .tooltip-text {
+    @apply opacity-100 visible;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  }
+  .backdrop-blur {
+    backdrop-filter: blur(10px);
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 10px;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation-name: fade-in;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+}
+
+.font-japanese {
+  font-family: 'Noto Sans JP', sans-serif;
+}

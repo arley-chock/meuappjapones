@@ -1,11 +1,18 @@
 <!-- Componente Pai (+page.svelte) -->
 <script>
-    import Capitulo from 'src/lib/components/capitulo.svelte';
-    import livro from 'src/lib/Data/Livro.json';
+    import Capitulo from '$lib/components/capitulo.svelte';
+    import livro from '$lib/livro.json';
+    import { page } from '$app/stores';
+
+    // Pega o id da URL
+    $: id = $page.params.id;
+    $: capitulo = livro.capitulos.find(c => String(c.id) === String(id));
 </script>
 
-<h1>Desvendando a Língua Japonesa</h1>
+<h1>Meu app de japonês</h1>
 
-{#each livro.capitulos as cap}
-    <Capitulo capitulo={cap} />
-{/each}
+{#if capitulo}
+    <Capitulo capitulo={capitulo} />
+{:else}
+    <p class="text-red-600">Capítulo não encontrado.</p>
+{/if}
